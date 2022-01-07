@@ -32,7 +32,7 @@ function createWidget() {
   dfTime.useMediumDateStyle()
   dfTime.useNoTimeStyle()
   
-  const Line1 = w.addText(`[🤖] Hi, ${User}. Good ${isMidnight || isMorning || isAfternoon || isEvening || isNight}`)
+  const Line1 = w.addText(`[🤖] Hi, ${USER}. Good ${isMidnight || isMorning || isAfternoon || isEvening || isNight}`)
   Line1.textColor = new Color('#ffffff')
   Line1.font = new Font('Menlo', 11)
   
@@ -46,7 +46,7 @@ function createWidget() {
   Line3.textColor = new Color('#5bd2f0')
   Line3.font = new Font('Menlo', 11)
   
-  const Line4 = w.addText(`[💏] ${countAnniversaries(Anniversary)}`)
+  const Line4 = w.addText(`[💏] ${countAnniversaries(ANNIV)}`)
   Line4.textColor = new Color('#ff69b4')
   Line4.font = new Font('Menlo', 11)
   
@@ -81,7 +81,7 @@ function renderYearProgress() {
 }
 
 function isFriday() {
-    let day = Date().getDay()
+    let day = new Date().getDay()
     if (day === 5) return true
     else return false
 }
