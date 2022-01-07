@@ -85,18 +85,20 @@ function countAnniversaries(dateString) {
     const yearDob = dob.getYear()
     const monthDob = dob.getMonth()
     const dateDob = dob.getDate()
+  
+    const yearAge = yearNow - yearDob
+    const monthAge = 0
+    const dateAge = 0
     
-    yearAge = yearNow - yearDob
-
     if (monthNow >= monthDob) {
-        const monthAge = monthNow - monthDob
+        monthAge = monthNow - monthDob
     } else {
         yearAge--
-        const monthAge = 12 + monthNow - monthDob
+        monthAge = 12 + monthNow - monthDob
     }
     
     if (dateNow >= dateDob) {
-        const dateAge = dateNow - dateDob
+        dateAge = dateNow - dateDob
     } else {
         monthAge--
         const dateAge = 31 + dateNow - dateDob;
