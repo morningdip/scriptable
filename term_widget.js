@@ -1,6 +1,8 @@
-const User = 'morningdip'
+const USER = 'morningdip'
+const ANNIV = '12/10/2017'
 
 const widget = createWidget()
+
 Script.setWidget(widget)
 Script.complete()
 
@@ -38,17 +40,23 @@ function createWidget() {
   Line2.textColor = new Color('#c6ffdd')
   Line2.font = new Font('Menlo', 11)
   
-  const Line3 = w.addText(`[${Device.isCharging() ? '⚡️' : '🔋'}] ${renderBattery()} Battery`)
-  Line3.textColor = new Color('#2aa876')
+  let answer = ''
+  if (isFriday()) answer = 'HELL YES IT IS'
+  const Line3 = w.addText(`[${isFriday() ? '😎' : '😶'}] Is today Friday? ${isFriday() ? 'HELL YES IT IS' : 'No, it\'s not friday'}`)
+  Line3.textColor = new Color('#5bd2f0')
   Line3.font = new Font('Menlo', 11)
   
-  const Line4 = w.addText(`[💏] ${countAnniversaries('12/10/2017')}`)
+  const Line4 = w.addText(`[💏] ${countAnniversaries(Anniversary)}`)
   Line4.textColor = new Color('#ff69b4')
   Line4.font = new Font('Menlo', 11)
   
-  const Line5 = w.addText(`[🕒] ${renderYearProgress()} YearProgress`)
-  Line5.textColor = new Color('#f19c65')
+  const Line5 = w.addText(`[${Device.isCharging() ? '⚡️' : '🔋'}] ${renderBattery()} Battery`)
+  Line5.textColor = new Color('#2aa876')
   Line5.font = new Font('Menlo', 11)
+  
+  const Line6 = w.addText(`[🕒] ${renderYearProgress()} YearProgress`)
+  Line6.textColor = new Color('#f19c65')
+  Line6.font = new Font('Menlo', 11)
   
   return w
 }
@@ -70,6 +78,12 @@ function renderYearProgress() {
     const end = new Date(now.getFullYear() + 1, 0, 1) // End of this year
     const progress = (now - start) / (end - start)
     return renderProgress(progress)
+}
+
+function isFriday() {
+    let day = Date().getDay()
+    if (day === 5) return true
+    else return false
 }
 
 function countAnniversaries(dateString) {
@@ -108,37 +122,37 @@ function countAnniversaries(dateString) {
         }
     }
   
-    let yearString = ""
-    let monthString = ""
-    let dayString = ""
-    let ageString = ""
+    let yearString = ''
+    let monthString = ''
+    let dayString = ''
+    let ageString = ''
     
     const age = {years: yearAge, months: monthAge, days: dateAge}
     
-    if (age.years > 1) yearString = " years";
-    else yearString = " year"
+    if (age.years > 1) yearString = ' years';
+    else yearString = ' year'
     
-    if (age.months> 1) monthString = " months";
-    else monthString = " month"
+    if (age.months> 1) monthString = ' months';
+    else monthString = ' month'
     
-    if (age.days > 1) dayString = " days";
-    else dayString = " day"
+    if (age.days > 1) dayString = ' days';
+    else dayString = ' day'
     
     if ((age.years > 0) && (age.months > 0) && (age.days > 0)) 
-        ageString = age.years + yearString + ", " + age.months + monthString + ", and " + age.days + dayString + "."
+        ageString = age.years + yearString + ', ' + age.months + monthString + ', and ' + age.days + dayString
     else if ((age.years == 0) && (age.months == 0) && (age.days > 0))
-        ageString = age.days + dayString + "."
+        ageString = age.days + dayString
     else if ((age.years > 0) && (age.months == 0) && (age.days == 0))
-        ageString = age.years + yearString + " . Happy Anniversary!"
+        ageString = age.years + yearString + ', Happy Anniversary!'
     else if ((age.years > 0) && (age.months > 0) && (age.days == 0))
-        ageString = age.years + yearString + " and " + age.months + monthString + "."
+        ageString = age.years + yearString + ' and ' + age.months + monthString
     else if ((age.years == 0) && (age.months > 0) && (age.days > 0))
-        ageString = age.months + monthString + " and " + age.days + dayString + "."
+        ageString = age.months + monthString + ' and ' + age.days + dayString
     else if ((age.years > 0) && (age.months == 0) && (age.days > 0))
-        ageString = age.years + yearString + " and " + age.days + dayString + "."
+        ageString = age.years + yearString + ' and ' + age.days + dayString
     else if ((age.years == 0) && (age.months > 0) && (age.days == 0))
-        ageString = age.months + monthString + "."
-    else ageString = "Oops! Could not calculate days!"
+        ageString = age.months + monthString
+    else ageString = 'Oops! Could not calculate days!'
     
     return ageString
 }
